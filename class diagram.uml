@@ -1,0 +1,166 @@
+classDiagram
+    %% Frontend (React Native) Classes
+    class NetworkManager {
+        -wifiManager: WifiManager
+        -hotspotManager: HotspotManager
+        +scanNetworks() Promise~List~
+        +connectToNetwork(ssid, password) Promise~boolean~
+        +createHotspot(ssid, password) Promise~boolean~
+        +disconnectNetwork() void
+        +stopHotspot() void
+        +getCurrentNetworkInfo() NetworkInfo
+    }
+    
+    class DeviceDiscovery {
+        -networkManager: NetworkManager
+        -discoveredDevices: Map~string, DeviceInfo~
+        +startDiscovery() void
+        +stopDiscovery() void
+        +getDiscoveredDevices() List~DeviceInfo~
+        +onDeviceFound(callback) void
+        +onDeviceLost(callback) void
+    }
+    
+    class ConnectionManager {
+        -deviceDiscovery: DeviceDiscovery
+        -socketManager: SocketManager
+        -activeConnections: Map~string, Connection~
+        +connectToDevice(deviceInfo) Promise~Connection~
+        +disconnectFromDevice(deviceId) void
+        +sendMessage(deviceId, message) Promise~boolean~
+        +sendFile(deviceId, fileUri) Promise~TransferStatus~
+        +onMessageReceived(callback) void
+        +onFileReceived(callback) void
+        +getActiveConnections() List~Connection~
+    }
+    
+    class ChatController {
+        -connectionManager: ConnectionManager
+        -messageStore: MessageStore
+        +sendMessage(deviceId, text) Promise~Message~
+        +getMessageHistory(deviceId) List~Message~
+        +onNewMessage(callback) void
+        +markAsRead(messageId) void
+    }
+    
+    class FileTransferController {
+        -connectionManager: ConnectionManager
+        -fileStore: FileStore
+        +sendFile(deviceId, fileUri) Promise~TransferStatus~
+        +cancelTransfer(transferId) void
+        +pauseTransfer(transferId) void
+        +resumeTransfer(transferId) void
+        +getTransferProgress(transferId) number
+        +getSentFiles() List~FileMetadata~
+        +getReceivedFiles() List~FileMetadata~
+        +onTransferProgress(callback) void
+        +onTransferComplete(callback) void
+    }
+    
+    class MessageStore {
+        -localStorage: Storage
+        +saveMessage(message) void
+        +getMessages(deviceId) List~Message~
+        +deleteMessage(messageId) void
+        +deleteAllMessages(deviceId) void
+    }
+    
+    class FileStore {
+        -fileSystem: FileSystem
+        +saveFile(fileData, metadata) Promise~string~
+        +getFile(fileId) Promise~File~
+        +getFileMetadata(fileId) FileMetadata
+        +getAllFiles() List~FileMetadata~
+        +deleteFile(fileId) void
+    }
+    
+    %% Backend (Python) Classes
+    class PythonBackendService {
+        -processManager: ProcessManager
+        -apiClient: ApiClient
+        +startBackend() Promise~boolean~
+        +stopBackend() void
+        +isRunning() boolean
+        +getServerInfo() ServerInfo
+    }
+    
+    class ApiClient {
+        -baseUrl: string
+        -webSocket: WebSocket
+        +sendRequest(endpoint, data) Promise~Response~
+        +subscribeToEvents(eventType, callback) void
+        +unsubscribeFromEvents(eventType) void
+        +closeConnection() void
+    }
+    
+    class ProcessManager {
+        -pythonProcess: Process
+        +startProcess(scriptPath, args) Promise~Process~
+        +stopProcess() void
+        +isProcessRunning() boolean
+        +getProcessOutput() string
+    }
+    
+    %% Data Models
+    class Message {
+        +id: string
+        +senderId: string
+        +receiverId: string
+        +text: string
+        +timestamp: Date
+        +isRead: boolean
+        +attachments: List~string~
+    }
+    
+    class FileMetadata {
+        +id: string
+        +name: string
+        +size: number
+        +mimeType: string
+        +path: string
+        +senderId: string
+        +receiverId: string
+        +timestamp: Date
+    }
+    
+    class DeviceInfo {
+        +id: string
+        +name: string
+        +ipAddress: string
+        +port: number
+        +deviceType: string
+        +lastSeen: Date
+    }
+    
+    class Connection {
+        +id: string
+        +deviceInfo: DeviceInfo
+        +status: ConnectionStatus
+        +establishedAt: Date
+        +lastActive: Date
+    }
+    
+    class TransferStatus {
+        +id: string
+        +fileId: string
+        +progress: number
+        +status: string
+        +speed: number
+        +startTime: Date
+        +endTime: Date
+    }
+    
+    %% Relationships
+    NetworkManager --> DeviceDiscovery
+    DeviceDiscovery --> ConnectionManager
+    ConnectionManager --> ChatController
+    ConnectionManager --> FileTransferController
+    ChatController --> MessageStore
+    FileTransferController --> FileStore
+    ApiClient --> PythonBackendService
+    ProcessManager --> PythonBackendService
+    ChatController ..> Message
+    FileTransferController ..> FileMetadata
+    FileTransferController ..> TransferStatus
+    DeviceDiscovery ..> DeviceInfo
+    ConnectionManager ..> Connection
