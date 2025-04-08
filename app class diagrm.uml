@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.0" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1">
+  <xmi:Documentation exporter="Claude" exporterVersion="3.7"/>
+  <uml:Model xmi:id="model_id" name="P2P Chat App Model">
+    <packagedElement xmi:type="uml:Package" xmi:id="package_frontend" name="React Native Frontend">
+      <!-- Core Application Classes -->
+      <packagedElement xmi:type="uml:Class" xmi:id="class_app" name="App">
+        <ownedAttribute xmi:id="app_attr1" name="networkManager" visibility="private" type="class_networkmanager"/>
+        <ownedAttribute xmi:id="app_attr2" name="uiController" visibility="private" type="class_uicontroller"/>
+        <ownedAttribute xmi:id="app_attr3" name="sessionManager" visibility="private" type="class_sessionmanager"/>
+        <ownedOperation xmi:id="app_op1" name="initialize" visibility="public">
+          <ownedParameter xmi:id="app_op1_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="app_op2" name="start" visibility="public">
+          <ownedParameter xmi:id="app_op2_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="app_op3" name="stop" visibility="public">
+          <ownedParameter xmi:id="app_op3_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+
+      <packagedElement xmi:type="uml:Class" xmi:id="class_uicontroller" name="UIController">
+        <ownedAttribute xmi:id="uictr_attr1" name="chatView" visibility="private"/>
+        <ownedAttribute xmi:id="uictr_attr2" name="fileExplorerView" visibility="private"/>
+        <ownedAttribute xmi:id="uictr_attr3" name="connectionView" visibility="private"/>
+        <ownedAttribute xmi:id="uictr_attr4" name="settingsView" visibility="private"/>
+        <ownedOperation xmi:id="uictr_op1" name="navigateTo" visibility="public">
+          <ownedParameter xmi:id="uictr_op1_param1" name="screen"/>
+          <ownedParameter xmi:id="uictr_op1_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="uictr_op2" name="showNotification" visibility="public">
+          <ownedParameter xmi:id="uictr_op2_param1" name="message"/>
+          <ownedParameter xmi:id="uictr_op2_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="uictr_op3" name="updateUI" visibility="public">
+          <ownedParameter xmi:id="uictr_op3_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+
+      <!-- Network Layer Classes -->
+      <packagedElement xmi:type="uml:Class" xmi:id="class_networkmanager" name="NetworkManager">
+        <ownedAttribute xmi:id="netmgr_attr1" name="wifiScanner" visibility="private" type="class_wifiscanner"/>
+        <ownedAttribute xmi:id="netmgr_attr2" name="hotspotCreator" visibility="private" type="class_hotspotcreator"/>
+        <ownedAttribute xmi:id="netmgr_attr3" name="deviceDiscovery" visibility="private" type="class_devicediscovery"/>
+        <ownedOperation xmi:id="netmgr_op1" name="scanWifiNetworks" visibility="public">
+          <ownedParameter xmi:id="netmgr_op1_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="netmgr_op2" name="connectToNetwork" visibility="public">
+          <ownedParameter xmi:id="netmgr_op2_param1" name="ssid"/>
+          <ownedParameter xmi:id="netmgr_op2_param2" name="password"/>
+          <ownedParameter xmi:id="netmgr_op2_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="netmgr_op3" name="createHotspot" visibility="public">
+          <ownedParameter xmi:id="netmgr_op3_param1" name="name"/>
+          <ownedParameter xmi:id="netmgr_op3_param2" name="password"/>
+          <ownedParameter xmi:id="netmgr_op3_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="netmgr_op4" name="discoverDevices" visibility="public">
+          <ownedParameter xmi:id="netmgr_op4_return" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="netmgr_op5" name="getCurrentConnection" visibility="public">
+          <ownedParameter xmi:id="netmgr_op5_return" direction="return"/>
+        </ownedOperation>
+      </packagedElement>
+
+      <packagedElement xmi:type="uml:Class" xmi:id="class_wifiscanner" name="WifiScanner">
+        <ownedAttribute xmi:id="wifiscn_attr1" name="permissionManager" visibility="private"/>
+        <ownedOperation xmi:id="wifiscn_op1" name="hasPermissions" visibility="public">
+          <ownedParameter xmi:id="wifiscn_op1_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="wifiscn_op2" name="requestPermissions" visibility="public">
+          <ownedParameter xmi:id="wifiscn_op2_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="wifiscn_op3" name="scan" visibility="public">
+          <ownedParameter xmi:id="wifiscn_op3_return" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="wifiscn_op4" name="getCurrentSSID" visibility="public">
+          <ownedParameter xmi:id="wifiscn_op4_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+
+      <packagedElement xmi:type="uml:Class" xmi:id="class_hotspotcreator" name="HotspotCreator">
+        <ownedAttribute xmi:id="hotspot_attr1" name="permissionManager" visibility="private"/>
+        <ownedOperation xmi:id="hotspot_op1" name="hasPermissions" visibility="public">
+          <ownedParameter xmi:id="hotspot_op1_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="hotspot_op2" name="requestPermissions" visibility="public">
+          <ownedParameter xmi:id="hotspot_op2_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="hotspot_op3" name="create" visibility="public">
+          <ownedParameter xmi:id="hotspot_op3_param1" name="name"/>
+          <ownedParameter xmi:id="hotspot_op3_param2" name="password"/>
+          <ownedParameter xmi:id="hotspot_op3_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="hotspot_op4" name="stop" visibility="public">
+          <ownedParameter xmi:id="hotspot_op4_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="hotspot_op5" name="isActive" visibility="public">
+          <ownedParameter xmi:id="hotspot_op5_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="hotspot_op6" name="getHotspotInfo" visibility="public">
+          <ownedParameter xmi:id="hotspot_op6_return" direction="return"/>
+        </ownedOperation>
+      </packagedElement>
+
+      <packagedElement xmi:type="uml:Class" xmi:id="class_devicediscovery" name="DeviceDiscovery">
+        <ownedAttribute xmi:id="devdisc_attr1" name="mDnsService" visibility="private"/>
+        <ownedAttribute xmi:id="devdisc_attr2" name="discoveredDevices" visibility="private"/>
+        <ownedOperation xmi:id="devdisc_op1" name="startDiscovery" visibility="public">
+          <ownedParameter xmi:id="devdisc_op1_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="devdisc_op2" name="stopDiscovery" visibility="public">
+          <ownedParameter xmi:id="devdisc_op2_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="devdisc_op3" name="getDiscoveredDevices" visibility="public">
+          <ownedParameter xmi:id="devdisc_op3_return" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="devdisc_op4" name="onDeviceFound" visibility="public">
+          <ownedParameter xmi:id="devdisc_op4_param1" name="callback"/>
+          <ownedParameter xmi:id="devdisc_op4_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="devdisc_op5" name="onDeviceLost" visibility="public">
+          <ownedParameter xmi:id="devdisc_op5_param1" name="callback"/>
+          <ownedParameter xmi:id="devdisc_op5_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+
+      <!-- Session Management Classes -->
+      <packagedElement xmi:type="uml:Class" xmi:id="class_sessionmanager" name="SessionManager">
+        <ownedAttribute xmi:id="sessmgr_attr1" name="connections" visibility="private"/>
+        <ownedAttribute xmi:id="sessmgr_attr2" name="chatManager" visibility="private" type="class_chatmanager"/>
+        <ownedAttribute xmi:id="sessmgr_attr3" name="fileTransferManager" visibility="private" type="class_filetransfermanager"/>
+        <ownedOperation xmi:id="sessmgr_op1" name="initializeSession" visibility="public">
+          <ownedParameter xmi:id="sessmgr_op1_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="sessmgr_op2" name="connectToDevice" visibility="public">
+          <ownedParameter xmi:id="sessmgr_op2_param1" name="device"/>
+          <ownedParameter xmi:id="sessmgr_op2_return" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="sessmgr_op3" name="disconnectDevice" visibility="public">
+          <ownedParameter xmi:id="sessmgr_op3_param1" name="deviceId"/>
+          <ownedParameter xmi:id="sessmgr_op3_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="sessmgr_op4" name="getActiveConnections" visibility="public">
+          <ownedParameter xmi:id="sessmgr_op4_return" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="sessmgr_op5" name="broadcastMessage" visibility="public">
+          <ownedParameter xmi:id="sessmgr_op5_param1" name="message"/>
+          <ownedParameter xmi:id="sessmgr_op5_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+
+      <packagedElement xmi:type="uml:Class" xmi:id="class_connectionmanager" name="ConnectionManager">
+        <ownedAttribute xmi:id="connmgr_attr1" name="socketManager" visibility="private" type="class_socketmanager"/>
+        <ownedAttribute xmi:id="connmgr_attr2" name="deviceDiscovery" visibility="private" type="class_devicediscovery"/>
+        <ownedOperation xmi:id="connmgr_op1" name="connect" visibility="public">
+          <ownedParameter xmi:id="connmgr_op1_param1" name="device"/>
+          <ownedParameter xmi:id="connmgr_op1_return" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="connmgr_op2" name="disconnect" visibility="public">
+          <ownedParameter xmi:id="connmgr_op2_param1" name="deviceId"/>
+          <ownedParameter xmi:id="connmgr_op2_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="connmgr_op3" name="sendData" visibility="public">
+          <ownedParameter xmi:id="connmgr_op3_param1" name="deviceId"/>
+          <ownedParameter xmi:id="connmgr_op3_param2" name="data"/>
+          <ownedParameter xmi:id="connmgr_op3_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="connmgr_op4" name="onDataReceived" visibility="public">
+          <ownedParameter xmi:id="connmgr_op4_param1" name="callback"/>
+          <ownedParameter xmi:id="connmgr_op4_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="connmgr_op5" name="getConnectionById" visibility="public">
+          <ownedParameter xmi:id="connmgr_op5_param1" name="deviceId"/>
+          <ownedParameter xmi:id="connmgr_op5_return" direction="return"/>
+        </ownedOperation>
+      </packagedElement>
+
+      <packagedElement xmi:type="uml:Class" xmi:id="class_socketmanager" name="SocketManager">
+        <ownedAttribute xmi:id="sockman_attr1" name="activeSockets" visibility="private"/>
+        <ownedOperation xmi:id="sockman_op1" name="createSocket" visibility="public">
+          <ownedParameter xmi:id="sockman_op1_param1" name="config"/>
+          <ownedParameter xmi:id="sockman_op1_return" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="sockman_op2" name="closeSocket" visibility="public">
+          <ownedParameter xmi:id="sockman_op2_param1" name="socketId"/>
+          <ownedParameter xmi:id="sockman_op2_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="sockman_op3" name="sendData" visibility="public">
+          <ownedParameter xmi:id="sockman_op3_param1" name="socketId"/>
+          <ownedParameter xmi:id="sockman_op3_param2" name="data"/>
+          <ownedParameter xmi:id="sockman_op3_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="sockman_op4" name="listenForData" visibility="public">
+          <ownedParameter xmi:id="sockman_op4_param1" name="socketId"/>
+          <ownedParameter xmi:id="sockman_op4_param2" name="callback"/>
+          <ownedParameter xmi:id="sockman_op4_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+
+      <!-- Feature Manager Classes -->
+      <packagedElement xmi:type="uml:Class" xmi:id="class_chatmanager" name="ChatManager">
+        <ownedAttribute xmi:id="chatmgr_attr1" name="messageStore" visibility="private" type="class_messagestore"/>
+        <ownedAttribute xmi:id="chatmgr_attr2" name="connectionManager" visibility="private" type="class_connectionmanager"/>
+        <ownedOperation xmi:id="chatmgr_op1" name="sendMessage" visibility="public">
+          <ownedParameter xmi:id="chatmgr_op1_param1" name="deviceId"/>
+          <ownedParameter xmi:id="chatmgr_op1_param2" name="message"/>
+          <ownedParameter xmi:id="chatmgr_op1_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="chatmgr_op2" name="receiveMessage" visibility="public">
+          <ownedParameter xmi:id="chatmgr_op2_param1" name="message"/>
+          <ownedParameter xmi:id="chatmgr_op2_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="chatmgr_op3" name="getMessageHistory" visibility="public">
+          <ownedParameter xmi:id="chatmgr_op3_param1" name="deviceId"/>
+          <ownedParameter xmi:id="chatmgr_op3_return" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="chatmgr_op4" name="registerMessageHandler" visibility="public">
+          <ownedParameter xmi:id="chatmgr_op4_param1" name="callback"/>
+          <ownedParameter xmi:id="chatmgr_op4_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:id="chatmgr_op5" name="unregisterMessageHandler" visibility="public">
+          <ownedParameter xmi:id="chatmgr_op5_return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="http://schema.omg.org/spec/UML/2.0/uml.xml#void"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+
+      <packagedElement xmi:type="uml:Class" xmi:id="class_filetransfermanager" name="FileTransferManager">
+        <ownedAttribute xmi:id="filemgr_attr1" name="fileStore" visibility="private" type="class_filestore"/>
+        <ownedAttribute xmi:id="filemgr_attr2" name="connectionManager" visibility="private" type="class_connectionmanager"/>
+        <ownedAttribute xmi:id="filemgr_attr3" name="transferQueue" visibility="private"/>
+        <ownedOperation xmi:id="filemgr_op1" name="sendFile" visibility="public">
+          <ownedParameter xmi:id="filemgr_op1_param1" name="deviceId"/>
+          <ownedParameter xmi:id="filemgr_op1_param2" name="filePath"/>
+          <ownedParameter xmi:id="filemgr_op1_return" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="filemgr_op2" name="receiveFile" visibility="public">
+          <ownedParameter xmi:id="filemgr_op2_param
